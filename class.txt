@@ -1,0 +1,9 @@
+1,Start of class
+2,Read Chapters 1-596
+3,Study for Exam
+4,Exam
+5,
+7,abc,basd,asdasds
+10,burhmonet
+8,Final Exam
+9,Nap time
