@@ -1,3 +1,9 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .month {
   border: 1px solid black;
 }
@@ -14,4 +20,31 @@
 }
 
 .daynum {
+}
+#classInput {
+  margin-right: 20%;
+  min-height: 100%;
+  max-width: 40%;
+  font-family: "Calibri";
+  resize: none;
+  flex: 0 0 1;
+}
+#invalidDatesInput {
+  font-family: "Calibri";
+  resize: none;
+}
+#startDate {
+  font-family: "Calibri";
+  flex: 0 0 1;
+}
+#createCalendar {
+  max-height: 10%;
+  height: 10%;
+}
+.input {
+  width: 40%;
+  height: 20%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
