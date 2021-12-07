@@ -1,4 +1,10 @@
 .app {
+  display: grid;
+}
+
+.dayWeek {
+  border: 1px solid black;
+  text-align: center;
 }
 
 .month {
@@ -9,10 +15,11 @@
   border: 1px solid black;
 }
 
-.day {
+.dayCell {
   border: 1px solid black;
   width: 200px;
   height: 150px;
+  vertical-align: top;
 }
 
 .daynum {

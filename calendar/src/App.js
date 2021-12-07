@@ -42,9 +42,9 @@ function returnDays(classinput, invalidDatesInput, start) {
   var invalidDays = [];
 
   for (let x = 0; x < content.length; x++) {
-    x = content[x];
-    x = x.split(",");
-    let date = new Date(Number(x[0]), Number(x[1]) - 1, Number(x[2]));
+    let invDay = content[x];
+    invDay = invDay.split(",");
+    let date = new Date(Number(invDay[0]), Number(invDay[1]) - 1, Number(invDay[2]));
     invalidDays.push(date);
   }
 
@@ -147,9 +147,11 @@ function Calendar(props) {
           }
           // Build day
           var day = (
-            <td className="day" key={daynum}>
-              <p className="daynum">{currentday.getDate()}</p>
-              {daycont}
+            <td className="dayCell" key={daynum}>
+              <div className="day">
+                <p className="daynum">{currentday.getDate()}</p>
+                {daycont}
+              </div>
             </td>
           );
           currentday.setDate(currentday.getDate() + 1);
@@ -174,13 +176,13 @@ function Calendar(props) {
               </th>
             </tr>
             <tr>
-              <th style={{ textAlign: "center" }}>Sunday</th>
-              <th style={{ textAlign: "center" }}>Monday</th>
-              <th style={{ textAlign: "center" }}>Tuesday</th>
-              <th style={{ textAlign: "center" }}>Wednesday</th>
-              <th style={{ textAlign: "center" }}>Thursday</th>
-              <th style={{ textAlign: "center" }}>Friday</th>
-              <th style={{ textAlign: "center" }}>Saturday</th>
+              <th className="dayWeek">Sunday</th>
+              <th className="dayWeek">Monday</th>
+              <th className="dayWeek">Tuesday</th>
+              <th className="dayWeek">Wednesday</th>
+              <th className="dayWeek">Thursday</th>
+              <th className="dayWeek">Friday</th>
+              <th className="dayWeek">Saturday</th>
             </tr>
             {allWeeks}
           </tbody>
