@@ -1,5 +1,6 @@
+/* calendar css */
 .app {
-  display: grid;
+  width: 100%;
 }
 
 .dayWeek {
@@ -7,38 +8,91 @@
   text-align: center;
 }
 
+.allMonths {
+  width: 80%;
+  margin: auto;
+}
+
 .month {
+  table-layout: fixed;
   border: 1px solid black;
+  width: 100%;
 }
 
 .week {
   border: 1px solid black;
 }
 
+.day {
+  display: grid;
+  grid-template-columns: 1fr 2em;
+  grid-template-rows: 1fr 2em;
+}
+
+.daycont {
+  grid-row-start: 2;
+  grid-column: span 2;
+  text-align: center;
+}
+
 .dayCell {
   border: 1px solid black;
-  width: 200px;
   height: 150px;
   vertical-align: top;
+  text-overflow: ellipsis;
+  overflow-wrap: anywhere;
 }
 
 .daynum {
+  grid-row-start: 1;
+  grid-column-start: 2;
 }
+
+#downloadPDF {
+  margin: auto;
+  margin-bottom: 1%;
+  display: block;
+}
+
+/* INPUT STYLINGS */
+
 #classInput {
   font-family: "Calibri";
   resize: none;
+  grid-row-start: 2;
 }
+
 #invalidDatesInput {
   font-family: "Calibri";
   resize: none;
+  grid-row-start: 2;
 }
+
 #startDate {
   font-family: "Calibri";
   flex: 0 0 1;
+  margin: auto;
+  display: block;
 }
+
 #createCalendar {
   max-height: 10%;
   height: 10%;
+  margin: auto;
+  display: block;
 }
+
+#middle {
+  grid-column-start: 2;
+  grid-row-start: 2;
+  margin: auto;
+}
+
 .input {
+  display: grid;
+  width: 60%;
+  height: 30%;
+  grid-template-columns: 30% 1fr 30%;
+  grid-template-rows: 3em 25%;
+  margin: auto;
 }

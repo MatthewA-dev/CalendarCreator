@@ -2,6 +2,49 @@ import "./App.css";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setClassInput, setInvalidInput, setStartDate } from "./input";
+import { jsPDF } from "jspdf";
+import { PDFDocument } from "pdf-lib";
+
+async function mergePDF(pdfs) {
+  var doc = await PDFDocument.create();
+
+  for (let index = 0; index < pdfs.length; index++) {
+    const element = await PDFDocument.load(pdfs[index]);
+    for (let pageIndex = 0; pageIndex < element.getPageCount; pageIndex++) {
+      doc.addPage(element.getPage(pageIndex));
+    }
+  }
+  return doc;
+}
+
+async function DownloadPDF() {
+  var margin = 10;
+  var months = document.getElementsByClassName("month");
+  var docs = [];
+  for (let index = 1; index < months.length; index++) {
+    var doc = new jsPDF("l", "px", [months[index].clientWidth + margin * 2, months[index].clientHeight + margin * 2.3]);
+    doc.html(months[index], { x: 0, y: 0, margin: margin });
+    docs.push(doc.output("arraybuffer"));
+  }
+  var mergedPDF = await mergePDF(docs);
+  mergedPDF = await mergedPDF.saveAsBase64({ dataUri: true });
+  window.open(mergedPDF);
+  //mergedPDF.save();
+  // //var doc = new jsPDF("l", "px", [months[0].clientWidth + margin * 2, months[0].clientHeight + margin * 2.3]);
+  // // add all pages for
+  // for (let index = 1; index < months.length; index++) {
+  //   console.log(index);
+  //   doc = doc.addPage([months[index].clientWidth + margin * 2, months[index].clientHeight + margin * 2.3], "l");
+  // }
+  // // await doc.html(months[1], { x: 0, y: 830, margin: 10 });
+  // // await doc.html(months[0], { x: 0, y: 0, margin: 10 });
+  // var height = 0;
+  // for (let index = 0; index < months.length; index++) {
+  //   await doc.html(months[index], { x: 0, y: height, margin: margin });
+  //   height += months[index].clientHeight + margin * 2.3;
+  // }
+  // doc.output("dataurlnewwindow");
+}
 
 function Input(props) {
   const dispatch = useDispatch();
@@ -10,11 +53,17 @@ function Input(props) {
   let sInput = useSelector((state) => state.input.startDate);
   return (
     <div className="input">
+      <p style={{ gridRowStart: 1, gridColumnStart: 1 }}>Enter the list of events.</p>
       <textarea name="" id="classInput" cols="30" rows="10" onChange={(event) => dispatch(setClassInput(event.target.value))}></textarea>
-      <button id="createCalendar" onClick={() => props.update(cInput, iInput, sInput)}>
-        Create
-      </button>
-      <input type="date" name="" id="startDate" onChange={(event) => dispatch(setStartDate(event.target.value))}></input>
+      <div id="middle">
+        <p style={{ display: "block" }}>Enter the start date</p>
+        <input type="date" name="" id="startDate" onChange={(event) => dispatch(setStartDate(event.target.value))}></input>
+        <br />
+        <button id="createCalendar" onClick={() => props.update(cInput, iInput, sInput)}>
+          Create
+        </button>
+      </div>
+      <p style={{ gridRowStart: 1, gridColumnStart: 3 }}>Enter the list of holidays.</p>
       <textarea name="" id="invalidDatesInput" cols="30" rows="10" onChange={(event) => dispatch(setInvalidInput(event.target.value))}></textarea>
     </div>
   );
@@ -131,7 +180,7 @@ function Calendar(props) {
           // Append blank days at currentday of month
           if (currentday.getDate() === 1) {
             for (var x = 0; x < currentday.getDay(); x++) {
-              week.push(<td className="day" key={x}></td>);
+              week.push(<td className="dayCell" style={{ border: "0px solid black" }} key={x}></td>);
             }
             daynum = currentday.getDay();
           }
@@ -150,7 +199,7 @@ function Calendar(props) {
             <td className="dayCell" key={daynum}>
               <div className="day">
                 <p className="daynum">{currentday.getDate()}</p>
-                {daycont}
+                <div className="daycont">{daycont}</div>
               </div>
             </td>
           );
@@ -191,7 +240,18 @@ function Calendar(props) {
       STARTDATE.setMonth(STARTDATE.getMonth() + 1);
       months.push(month);
     }
-    return <div>{months}</div>;
+    if (months === []) {
+      return <div></div>;
+    }
+    // add button to download all calendars as pdf
+    return (
+      <div className="allMonths">
+        <button id="downloadPDF" onClick={DownloadPDF}>
+          Download All as PDF
+        </button>
+        {months}
+      </div>
+    );
   } catch (err) {
     throw err;
     return <div>Invalid Input</div>;
@@ -218,6 +278,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Input update={this.updateState.bind(this)} />
+        <br />
         <Calendar class={this.state.class} invalid={this.state.invalid} start={this.state.start} />
       </div>
     );
