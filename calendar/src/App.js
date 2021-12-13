@@ -10,11 +10,10 @@ async function mergePDF(pdfs) {
 
   for (let index = 0; index < pdfs.length; index++) {
     const element = await PDFDocument.load(pdfs[index]);
-    for (let pageIndex = 0; pageIndex < element.getPageCount; pageIndex++) {
-      doc.addPage(element.getPage(pageIndex));
-    }
+    const copiedPagesA = await doc.copyPages(element, element.getPageIndices());
+    copiedPagesA.forEach((page) => doc.addPage(page))
   }
-  return doc;
+  return await doc.saveAsBase64({dataUri: true});
 }
 
 async function DownloadPDF() {
@@ -27,8 +26,12 @@ async function DownloadPDF() {
     docs.push(doc.output("arraybuffer"));
   }
   var mergedPDF = await mergePDF(docs);
-  mergedPDF = await mergedPDF.saveAsBase64({ dataUri: true });
-  window.open(mergedPDF);
+  //var mergedPDF = await PDFDocument.create();
+
+  //mergedPDF.addPage();
+  window.open(mergedPDF)
+  //mergedPDF = await mergedPDF.saveAsBase64({ dataUri: true });
+  //window.open(mergedPDF);
   //mergedPDF.save();
   // //var doc = new jsPDF("l", "px", [months[0].clientWidth + margin * 2, months[0].clientHeight + margin * 2.3]);
   // // add all pages for
