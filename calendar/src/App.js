@@ -9,27 +9,49 @@ async function mergePDF(pdfs) {
   var doc = await PDFDocument.create();
 
   for (let index = 0; index < pdfs.length; index++) {
+    // var pdf = await PDFDocument.load(pdfs[index]);
+    // for (let pageIndex = 0; pageIndex < pdf.getPageCount(); pageIndex++) {
+      // const element = pdf.copyPages(pdf, [pageIndex]);
+      // doc.addPage(element)
+    // }
     const element = await PDFDocument.load(pdfs[index]);
     const copiedPagesA = await doc.copyPages(element, element.getPageIndices());
     copiedPagesA.forEach((page) => doc.addPage(page))
   }
-  return await doc.saveAsBase64({dataUri: true});
+  return doc;
 }
 
 async function DownloadPDF() {
   var margin = 10;
   var months = document.getElementsByClassName("month");
   var docs = [];
-  for (let index = 1; index < months.length; index++) {
+  for (let index = 0; index < months.length; index++) {
     var doc = new jsPDF("l", "px", [months[index].clientWidth + margin * 2, months[index].clientHeight + margin * 2.3]);
-    doc.html(months[index], { x: 0, y: 0, margin: margin });
+    await doc.html(months[index], { x: 0, y: 0, margin: margin });
+    //doc.save("month.pdf")
     docs.push(doc.output("arraybuffer"));
   }
   var mergedPDF = await mergePDF(docs);
   //var mergedPDF = await PDFDocument.create();
 
-  //mergedPDF.addPage();
-  window.open(mergedPDF)
+  mergedPDF = await mergedPDF.save();
+  //mergedPDF = mergedPDF.blob();
+  mergedPDF = new Blob([mergedPDF], { type: "octet-stream" });
+
+  var isIE = false || !!document.documentMode;
+  if (isIE) {
+      window.navigator.msSaveBlob(mergedPDF, "month.pdf");
+  } else {
+      var url = window.URL || window.webkitURL;
+      var link = url.createObjectURL(mergedPDF);
+      var a = document.createElement("a");
+      a.download = "month.pdf";
+      a.href = link;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+  }
+  //window.open(mergedPDF)
   //mergedPDF = await mergedPDF.saveAsBase64({ dataUri: true });
   //window.open(mergedPDF);
   //mergedPDF.save();
@@ -257,7 +279,6 @@ function Calendar(props) {
     );
   } catch (err) {
     throw err;
-    return <div>Invalid Input</div>;
   }
 }
 
