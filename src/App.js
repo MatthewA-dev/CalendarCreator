@@ -11,12 +11,12 @@ async function mergePDF(pdfs) {
   for (let index = 0; index < pdfs.length; index++) {
     // var pdf = await PDFDocument.load(pdfs[index]);
     // for (let pageIndex = 0; pageIndex < pdf.getPageCount(); pageIndex++) {
-      // const element = pdf.copyPages(pdf, [pageIndex]);
-      // doc.addPage(element)
+    // const element = pdf.copyPages(pdf, [pageIndex]);
+    // doc.addPage(element)
     // }
     const element = await PDFDocument.load(pdfs[index]);
     const copiedPagesA = await doc.copyPages(element, element.getPageIndices());
-    copiedPagesA.forEach((page) => doc.addPage(page))
+    copiedPagesA.forEach((page) => doc.addPage(page));
   }
   return doc;
 }
@@ -40,16 +40,16 @@ async function DownloadPDF() {
 
   var isIE = false || !!document.documentMode;
   if (isIE) {
-      window.navigator.msSaveBlob(mergedPDF, "month.pdf");
+    window.navigator.msSaveBlob(mergedPDF, "month.pdf");
   } else {
-      var url = window.URL || window.webkitURL;
-      var link = url.createObjectURL(mergedPDF);
-      var a = document.createElement("a");
-      a.download = "month.pdf";
-      a.href = link;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+    var url = window.URL || window.webkitURL;
+    var link = url.createObjectURL(mergedPDF);
+    var a = document.createElement("a");
+    a.download = "month.pdf";
+    a.href = link;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
   }
   //window.open(mergedPDF)
   //mergedPDF = await mergedPDF.saveAsBase64({ dataUri: true });
