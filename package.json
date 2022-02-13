@@ -1,7 +1,7 @@
 {
   "name": "calendar",
   "version": "0.1.0",
-  "homepage" : "https://matthewa-dev.github.io/calendarcreator",
+  "homepage" : "https://matthewa-dev.github.io/CalendarCreator",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
