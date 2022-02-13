@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/github.io/calendarcreator/static/css/main.0e592839.chunk.css",
+    "main.js": "/github.io/calendarcreator/static/js/main.addf0109.chunk.js",
+    "main.js.map": "/github.io/calendarcreator/static/js/main.addf0109.chunk.js.map",
+    "runtime-main.js": "/github.io/calendarcreator/static/js/runtime-main.f9f47722.js",
+    "runtime-main.js.map": "/github.io/calendarcreator/static/js/runtime-main.f9f47722.js.map",
+    "static/js/2.18e01e6f.chunk.js": "/github.io/calendarcreator/static/js/2.18e01e6f.chunk.js",
+    "static/js/2.18e01e6f.chunk.js.map": "/github.io/calendarcreator/static/js/2.18e01e6f.chunk.js.map",
+    "static/js/3.13081aa7.chunk.js": "/github.io/calendarcreator/static/js/3.13081aa7.chunk.js",
+    "static/js/3.13081aa7.chunk.js.map": "/github.io/calendarcreator/static/js/3.13081aa7.chunk.js.map",
+    "static/js/4.ed65ac25.chunk.js": "/github.io/calendarcreator/static/js/4.ed65ac25.chunk.js",
+    "static/js/4.ed65ac25.chunk.js.map": "/github.io/calendarcreator/static/js/4.ed65ac25.chunk.js.map",
+    "static/js/5.7310d071.chunk.js": "/github.io/calendarcreator/static/js/5.7310d071.chunk.js",
+    "static/js/5.7310d071.chunk.js.map": "/github.io/calendarcreator/static/js/5.7310d071.chunk.js.map",
+    "index.html": "/github.io/calendarcreator/index.html",
+    "static/css/main.0e592839.chunk.css.map": "/github.io/calendarcreator/static/css/main.0e592839.chunk.css.map",
+    "static/js/2.18e01e6f.chunk.js.LICENSE.txt": "/github.io/calendarcreator/static/js/2.18e01e6f.chunk.js.LICENSE.txt",
+    "static/js/3.13081aa7.chunk.js.LICENSE.txt": "/github.io/calendarcreator/static/js/3.13081aa7.chunk.js.LICENSE.txt",
+    "static/js/4.ed65ac25.chunk.js.LICENSE.txt": "/github.io/calendarcreator/static/js/4.ed65ac25.chunk.js.LICENSE.txt",
+    "static/js/5.7310d071.chunk.js.LICENSE.txt": "/github.io/calendarcreator/static/js/5.7310d071.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f9f47722.js",
+    "static/js/3.13081aa7.chunk.js",
+    "static/css/main.0e592839.chunk.css",
+    "static/js/main.addf0109.chunk.js"
+  ]
+}
