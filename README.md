@@ -1,6 +1,6 @@
 Simple calendar app written in React.
 
-This should be hosted on https://matthewa-dev.github.io/calendarcreator.
+This should be hosted on https://matthewa-dev.github.io/CalendarCreator.
 
 
 ## Available Scripts
